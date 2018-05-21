@@ -1,0 +1,28 @@
+//Create event: Obj_motionplan (needs to be present in room)
+global.motiongrid= mp_grid_create(0,0,room_width/24,room_height/24,24,24);
+mp_grid_add_instances(global.motiongrid,wall,false);
+
+//Create event: obj_pathplanner
+motionpath=path_add();
+
+//Create event: Object that you want to move
+planner=instance_create_layer(x,y,"Instances",obj_pathplanner);
+planner.follower=id[self];
+
+//Step event: Object you want to move
+with (planner)
+{
+	x=follower.x;
+	y=follower.y;
+	script_execute(planscript,other.targetx,other.targety,other.stat_m)
+}
+
+
+
+//Script
+//Plan route to target location
+target_x=argument0;
+target_y=argument1;
+pathspeed=argument2;
+mp_grid_path(global.motiongrid,motionpath,x,y,target_x,target_y,true);
+path_start(motionpath,pathspeed,path_action_stop,true);
