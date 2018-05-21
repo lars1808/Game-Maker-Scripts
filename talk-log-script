@@ -1,0 +1,21 @@
+//Create: object text_draw
+message1="";
+message2="";
+message3="";
+message4="";
+message5="";
+depth=-1000
+
+//Draw: object_to_draw
+draw_text_ext(camera_get_view_x(view_camera[0])+10,camera_get_view_y(view_camera[0])+10, message1, -1, 500);
+draw_text_ext(camera_get_view_x(view_camera[0])+10,camera_get_view_y(view_camera[0])+20, message2, -1, 500);
+draw_text_ext(camera_get_view_x(view_camera[0])+10,camera_get_view_y(view_camera[0])+30, message3, -1, 500);
+draw_text_ext(camera_get_view_x(view_camera[0])+10,camera_get_view_y(view_camera[0])+40, message4, -1, 500);
+draw_text_ext(camera_get_view_x(view_camera[0])+10,camera_get_view_y(view_camera[0])+50, message5, -1, 500);
+
+//Say script (Just insert the text in the argument0 line)
+text_write.message5=text_write.message4;
+text_write.message4=text_write.message3;
+text_write.message3=text_write.message2;
+text_write.message2=text_write.message1;
+text_write.message1=argument0;
