@@ -1,0 +1,5 @@
+var passorfail;
+var armorsave=argument1;
+var ap=argument0;
+if irandom_range(1,6)>(armorsave+ap)=true then passorfail=true else passorfail=false
+return passorfail
