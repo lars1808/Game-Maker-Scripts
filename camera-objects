@@ -1,0 +1,57 @@
+      //Create event: Camera object
+zoom_level = 1;
+//Get the starting view size to be used for interpolation later
+default_zoom_width = 960;
+default_zoom_height = 960;
+
+//default_zoom_width = camera_get_view_width(view_camera[0]);
+//default_zoom_height = camera_get_view_height(view_camera[0]);
+
+
+      //Step event
+//Move the zoom level based on mouse scrolling. Clamp the value so stuff doesn't get too silly.
+zoom_level = clamp(zoom_level + (((mouse_wheel_down() - mouse_wheel_up())) * 0.1), 0.5, 1.5);
+
+//Get current size
+var view_w = camera_get_view_width(view_camera[0]);
+var view_h = camera_get_view_height(view_camera[0]);
+
+//Set the rate of interpolation
+var rate = 0.2;
+
+//Get new sizes by interpolating current and target zoomed size
+var new_w = lerp(view_w, zoom_level * default_zoom_width, rate);
+var new_h = lerp(view_h, zoom_level * default_zoom_height, rate);
+
+//Apply the new size
+camera_set_view_size(view_camera[0], new_w, new_h);
+
+//Get the shift necessary to re-align the view.
+var shift_x = camera_get_view_x(view_camera[0]) - (new_w - view_w) * 0.5;
+var shift_y = camera_get_view_y(view_camera[0]) - (new_h - view_h) * 0.5;
+
+//Update the view position
+camera_set_view_pos(view_camera[0],shift_x, shift_y);
+
+      //Room start
+//Enable the use of views
+view_enabled = true;
+
+//Make view 0 visible
+view_set_visible(0, true);
+
+//Set the port bounds of view 0 to 640x480
+view_set_wport(0, 960);
+view_set_hport(0, 960);
+
+//Camera creation
+
+//Build a camera at (0,0), with size 640x480, 0 degrees of angle, no target instance, instant-jupming hspeed and vspeed, with a 32 pixel border
+camera = camera_create_view(0, 0, 960, 960, 0, obj_to_follow, -1, -1, 480,480);
+
+//Set view0 to use the camera "camera"
+view_set_camera(0, camera);
+
+//Resize and center
+window_set_rectangle((display_get_width() - view_wport[0]) * 0.5, (display_get_height() - view_hport[0]) * 0.5, view_wport[0], view_hport[0]);
+surface_resize(application_surface,view_wport[0],view_hport[0]);
