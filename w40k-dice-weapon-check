@@ -1,0 +1,18 @@
+//Script: weaponcheck(stat_w,other.stat_t)
+
+var passorfail
+var weaponstrength=argument0
+var enemytoughness=argument1
+var diceroll=irandom_range(1,6)
+if weaponstrength>=enemytoughness*2
+	{if diceroll>=2 then passorfail=true else passorfail=false};
+if weaponstrength<enemytoughness*2 and weaponstrength>enemytoughness
+	{if diceroll>=3 then passorfail=true else passorfail=false};
+if weaponstrength=enemytoughness
+	{if diceroll>=4 then passorfail=true else passorfail=false};
+if weaponstrength<enemytoughness and enemytoughness<weaponstrength*2
+	{if diceroll>=5 then passorfail=true else passorfail=false};
+if enemytoughness>=weaponstrength*2
+	{if diceroll>=6 then passorfail=true else passorfail=false};
+
+return passorfail;
