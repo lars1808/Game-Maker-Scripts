@@ -1,0 +1,6 @@
+argument0=where to turn to
+
+var pd = argument0; //Get the direction to point to
+var dd = ((((pd - current_angle) mod 360) + 540) mod 360) - 180; //get the angle difference
+current_angle += min(abs(dd), 10) * sign(dd);  //Turn the turret (set the 10 value to whatever you wish as it will be the maximum turn speed in degrees per step).
+
