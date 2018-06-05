@@ -1,3 +1,9 @@
+/// nearestenemy(max_dist,enemy,wall)
+/// @description nearestenemy(max_dist,enemy,wall)
+/// @param max_dist
+/// @param enemy
+/// @param wall
+
 var i, enemy;
 var closest_enemy = -1;
 var max_dist = argument0;
